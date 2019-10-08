@@ -63,4 +63,19 @@
          .removeClass("start");
      }                                                                          // if you won the game it displays the 'You win' text and gets rid of the starting text
    }
+   handleInteraction(content) {
+    let button = $(`#qwerty button:contains('${content}')`);                    //selects the button
+    button.prop("disabled", true);
+    if (!phrase.checkLetter(content)) {
+      button.addClass("wrong");
+      this.removeLife();
+    } else {
+      button.addClass("chosen");
+      phrase.showMatchedLetter(content);
+
+      if (this.checkForWin()) {
+        this.gameOver("won");
+      }
+    }
+  }                                                                             //checks if button clicked is wrong or write and adds corresponding classes 
   }
